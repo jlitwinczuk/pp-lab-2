@@ -31,13 +31,17 @@ public class master {
 
         System.out.printf("Średnia wszystkich ocen: %.2f", srednia);
     }
-    
+
     private static void podajOceny(int[] oceny, Scanner scanner, String przedmiot) {
         int suma = 0;
         System.out.println("Podaj oceny z " + przedmiot + ":");
         for (int i = 0; i < oceny.length; i++) {
-            System.out.printf("Podaj ocenę nr %d z %s: ", i + 1, przedmiot);
-            oceny[i] = scanner.nextInt();
+            int ocena;
+            do {
+                System.out.printf("Podaj ocenę nr %d z %s: ", i + 1, przedmiot);
+                ocena = scanner.nextInt();
+            } while (ocena < 1 || ocena > 5);
+            oceny[i] = ocena;
             suma += oceny[i];
         }
 
@@ -46,9 +50,9 @@ public class master {
             System.out.print(ocena + " ");
         }
         System.out.println("\nSuma ocen z " + przedmiot + ": " + suma);
-        System.out.printf("Średnia ocen z %s: %.2f\n\n", przedmiot, suma / (double)oceny.length);
+        System.out.printf("Średnia ocen z %s: %.2f\n\n", przedmiot, suma / (double) oceny.length);
     }
-    
+
     private static double sumaOcen(int[] oceny) {
         int suma = 0;
         for (int ocena : oceny) {
