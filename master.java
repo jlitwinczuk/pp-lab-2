@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class master {
     public static void main(String[] args) {
@@ -30,7 +31,21 @@ public class master {
         double srednia = suma / liczbaOcen;
 
         System.out.printf("Średnia wszystkich ocen: %.2f", srednia);
+
+        int[] wszystkieOceny = new int[liczbaOcen];
+        int index = 0;
+        for (int ocena : matematyka) wszystkieOceny[index++] = ocena;
+        for (int ocena : fizyka) wszystkieOceny[index++] = ocena;
+        for (int ocena : chemia) wszystkieOceny[index++] = ocena;
+        for (int ocena : informatyka) wszystkieOceny[index++] = ocena;
+
+        Arrays.sort(wszystkieOceny);
+        double mediana = obliczMediane(wszystkieOceny);
+        System.out.printf("\nMediana ocen: %.2f", mediana);
+
     }
+
+
 
     private static void podajOceny(int[] oceny, Scanner scanner, String przedmiot) {
         int suma = 0;
@@ -59,5 +74,14 @@ public class master {
             suma += ocena;
         }
         return suma;
+    }
+
+    private static double obliczMediane(int[] tablica) {
+        int mediana = tablica.length / 2;
+        if (tablica.length % 2 == 0) {
+            return (tablica[mediana - 1] + tablica[mediana]) / 2.0;
+        } else {
+            return tablica[mediana];
+        }
     }
 }
