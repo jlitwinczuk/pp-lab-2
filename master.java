@@ -3,20 +3,47 @@ import java.util.Scanner;
 public class master {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Ile ocen z matematyki? ");
+        int[] matematyka = new int[scanner.nextInt()];
+        
+        System.out.print("Ile ocen z fizyki? ");
+        int[] fizyka = new int[scanner.nextInt()];
+        
+        System.out.print("Ile ocen z chemii? ");
+        int[] chemia = new int[scanner.nextInt()];
+        
+        System.out.print("Ile ocen z informatyki? ");
+        int[] informatyka = new int[scanner.nextInt()];
+        
+        podajOceny(matematyka, scanner, "matematyki");
+        podajOceny(fizyka, scanner, "fizyki");
+        podajOceny(chemia, scanner, "chemii");
+        podajOceny(informatyka, scanner, "informatyki");
+        double suma = 0;
 
-        System.out.println("Podaj ocenę z matematyki:");
-        double matematyka = scanner.nextDouble();
+        int liczbaOcen = matematyka.length + fizyka.length + chemia.length + informatyka.length;
+        suma += sumaOcen(matematyka);
+        suma += sumaOcen(fizyka);
+        suma += sumaOcen(chemia);
+        suma += sumaOcen(informatyka);
+        double srednia = suma / liczbaOcen;
 
-        System.out.println("Podaj ocenę z fizyki:");
-        double fizyka = scanner.nextDouble();
-
-        System.out.println("Podaj ocenę z chemii:");
-        double chemia = scanner.nextDouble();
-
-        System.out.println("Podaj ocenę z informatyki:");
-        double informatyka = scanner.nextDouble();
-
-        double srednia = (matematyka + fizyka + chemia + informatyka) / 4.0;
-        System.out.println("Średnia ocen z przedmiotów: " + srednia);
+        System.out.printf("Średnia wszystkich ocen: %.2f", srednia);
+    }
+    
+    private static void podajOceny(int[] oceny, Scanner scanner, String przedmiot) {
+        for (int i = 0; i < oceny.length; i++) {
+            System.out.printf("Podaj ocenę nr %d z %s: ", i + 1, przedmiot);
+            oceny[i] = scanner.nextInt();
+        }
+    }
+    
+    private static double sumaOcen(int[] oceny) {
+        int suma = 0;
+        for (int ocena : oceny) {
+            suma += ocena;
+        }
+        return suma;
     }
 }
